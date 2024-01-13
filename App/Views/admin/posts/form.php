@@ -8,6 +8,7 @@
             <div class="modal-body">
                 <form action="<?php echo $action; ?>" class="form-modal form">
                     <div id="form-results"></div>
+
                     <div class="form-group col-sm-12">
                         <label for="title">Post Title</label>
                         <input type="text" class="form-control" name="title" id="title" value="<?php echo $title; ?>" placeholder="Enter Post Title">
@@ -15,10 +16,8 @@
 
                     <div class="form-group col-sm-12">
                         <label for="details">Details</label>
-                        <textarea name="details" class="details" id="details" cols="30" rows="10"><?php echo $details;?></textarea>
+                        <textarea name="details" class="details" id="details" cols="30" rows="10"><?php echo $details; ?></textarea>
                     </div>
-
-                    
 
                     <div class="form-group col-sm-12">
     <label for="tags_post">Tags</label>
@@ -33,8 +32,8 @@
                     <div class="form-group col-sm-6">
                         <label for="category_id">Category</label>
                         <select name="category_id" class="form-control" id="users_group_id">
-                            <?php foreach ($categories AS $category) { ?>
-                                <option value="<?php echo $category->id; ?>" <?php echo $category->id == $category_id ? 'selected' : false; ?>><?php echo $category->name; ?></option>
+                            <?php foreach ($categories as $category) { ?>
+                                <option value="<?php echo $category->id; ?>" <?php echo $category->id == $category_id ? 'selected' : ''; ?>><?php echo $category->name; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -42,8 +41,8 @@
                     <div class="form-group col-sm-6">
                         <label for="status">Status</label>
                         <select class="form-control" id="status" name="status">
-                            <option value="enabled">Enabled </option>
-                            <option value="disabled" <?php echo $status == 'disabled' ? 'selected': false; ?>>Disabled</option>
+                            <option value="enabled">Enabled</option>
+                            <option value="disabled" <?php echo $status == 'disabled' ? 'selected' : ''; ?>>Disabled</option>
                         </select>
                     </div>
 
@@ -55,9 +54,9 @@
                     </div>
 
                     <?php if ($image) { ?>
-                    <div class="form-group col-sm-6">
-                        <img src="<?php echo $image; ?>" style="width:50px; height: 50px;" alt="" />
-                    </div>
+                        <div class="form-group col-sm-6">
+                            <img src="<?php echo $image; ?>" style="width:50px; height: 50px;" alt="" />
+                        </div>
                     <?php } ?>
 
                     <div class="clearfix"></div>
@@ -72,6 +71,7 @@
         </div>
     </div>
 </div>
+
 <script>
     for (name in CKEDITOR.instances) {
         CKEDITOR.instances[name].destroy();

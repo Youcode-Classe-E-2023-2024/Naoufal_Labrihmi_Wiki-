@@ -34,29 +34,59 @@ class PostsController extends Controller
         return $this->form();
     }
 
-    /**
-    * Submit for creating new post
-    *
-    * @return string | json
-    */
-    public function submit()
-    {
-        $json = [];
+   
+// ... (existing code)
 
-        if ($this->isValid()) {
-            // it means there are no errors in form validation
-            $this->load->model('Posts')->create();
+/**
+ * Submit for creating new post
+ *
+ * @return string | json
+ */
+public function submit()
+{
+    $json = [];
 
-            $json['success'] = 'Post Has Been Created Successfully';
+    if ($this->isValid()) {
+        // it means there are no errors in form validation
+        $this->load->model('Posts')->create();
 
-            $json['redirectTo'] = $this->url->link('/admin/posts');
-        } else {
-            // it means there are errors in form validation
-            $json['errors'] = $this->validator->flattenMessages();
-        }
+        $json['success'] = 'Post Has Been Created Successfully';
 
-        return $this->json($json);
+        $json['redirectTo'] = $this->url->link('/admin/posts');
+    } else {
+        // it means there are errors in form validation
+        $json['errors'] = $this->validator->flattenMessages();
     }
+
+    return $this->json($json);
+}
+
+/**
+ * Submit for updating post
+ *
+ * @param int $id
+ * @return string | json
+ */
+public function save($id)
+{
+    $json = [];
+
+    if ($this->isValid($id)) {
+        // it means there are no errors in form validation
+        $this->load->model('Posts')->update($id);
+
+        $json['success'] = 'Posts Has Been Updated Successfully';
+
+        $json['redirectTo'] = $this->url->link('/admin/posts');
+    } else {
+        // it means there are errors in form validation
+        $json['errors'] = $this->validator->flattenMessages();
+    }
+
+    return $this->json($json);
+}
+
+// ... (existing code)
 
      /**
      * Display Edit Form
@@ -132,50 +162,37 @@ private function form($post = null)
 
 
 
-    /**
-    * Submit for creating new post
-    *
-    * @return string | json
-    */
-    public function save($id)
-    {
-        $json = [];
+   
 
-        if ($this->isValid($id)) {
-            // it means there are no errors in form validation
-            $this->load->model('Posts')->update($id, ['tags_post' => implode(',', $this->request->post('tags_post'))]);
+    // PostsController.php
 
-            $json['success'] = 'Posts  Has Been Updated Successfully';
+/**
+ * Delete Record
+ *
+ * @param int $id
+ * @return mixed
+ */
+public function delete($id)
+{
+    $postsModel = $this->load->model('Posts');
 
-            $json['redirectTo'] = $this->url->link('/admin/posts');
-        } else {
-            // it means there are errors in form validation
-            $json['errors'] = $this->validator->flattenMessages();
-        }
-
-        return $this->json($json);
+    if (!$postsModel->exists($id)) {
+        return $this->url->redirectTo('/404');
     }
 
-     /**
-     * Delete Record
-     *
-     * @param int $id
-     * @return mixed
-     */
-    public function delete($id)
-    {
-        $postsModel = $this->load->model('Posts');
+    // Delete associated tags before deleting the post
+    // $postsModel->deletePostTags($id);
 
-        if (! $postsModel->exists($id)) {
-            return $this->url->redirectTo('/404');
-        }
+    // Now, delete the post
+    $postsModel->delete($id);
 
-        $postsModel->delete($id);
+    $json['success'] = 'Post Has Been Deleted Successfully';
 
-        $json['success'] = 'Post Has Been Deleted Successfully';
+    return $this->json($json);
+}
 
-        return $this->json($json);
-    }
+
+
 
      /**
      * Validate the form

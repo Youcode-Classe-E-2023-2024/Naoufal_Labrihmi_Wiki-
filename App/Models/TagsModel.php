@@ -111,4 +111,18 @@ class TagsModel extends Model
 
         return $tag;
     }
+    // TagsModel.php
+
+/**
+ * Delete a specific post tag
+ *
+ * @param int $postId
+ * @param int $tagId
+ * @return void
+ */
+public function deletePostTag($postId, $tagId)
+{
+    $this->db->where('post_id = ? AND tag_id = ?', $postId, $tagId)->delete('post_tags');
+}
+
 }
