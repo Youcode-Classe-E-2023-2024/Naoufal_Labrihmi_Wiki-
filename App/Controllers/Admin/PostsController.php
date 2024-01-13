@@ -78,56 +78,59 @@ class PostsController extends Controller
     }
 
      /**
-     * Display Form
-     *
-     * @param \stdClass $post
-     */
-    private function form($post = null)
-    {
-        if ($post) {
-            // editing form
-            $data['target'] = 'edit-post-' . $post->id;
-
-            $data['action'] = $this->url->link('/admin/posts/save/' . $post->id);
-
-            $data['heading'] = 'Edit ' . $post->title;
-        } else {
-            // adding form
-            $data['target'] = 'add-post-form';
-
-            $data['action'] = $this->url->link('/admin/posts/submit');
-
-            $data['heading'] = 'Add New Post';
-        }
-
-        $post = (array) $post;
-
-        $data['title'] = array_get($post, 'title');
-        $data['category_id'] = array_get($post, 'category_id');
-        $data['status'] = array_get($post, 'status', 'enabled');
-        $data['details'] = array_get($post, 'details');
-        $data['tags'] = array_get($post, 'tags');
-        $data['id'] = array_get($post, 'id');
-
-        $data['image'] = '';
-        $data['related_posts'] = [];
-
-        if ($post['related_posts']) { // change this condition
-            // to if (! empty($post['related_posts'])
-            $data['related_posts'] = explode(',', $post['related_posts']);
-        }
-
-        if (! empty($post['image'])) {
-            // default path to upload post image : public/images
-            $data['image'] = $this->url->link('public/images/' . $post['image']);
-        }
-
-        $data['categories'] = $this->load->model('Categories')->all();
-
-        $data['posts'] = $this->load->model('Posts')->all();
-
-        return $this->view->render('admin/posts/form', $data);
+ * Display Form
+ *
+ * @param \stdClass $post
+ */
+private function form($post = null)
+{
+    if ($post) {
+        // Editing form
+        $data['target'] = isset($post->id) ? 'edit-post-' . $post->id : '';
+        $data['action'] = $this->url->link('/admin/posts/save/' . $post->id);
+        $data['heading'] = 'Edit ' . $post->title;
+    } else {
+        // Adding form
+        $data['target'] = 'add-post-form';
+        $data['action'] = $this->url->link('/admin/posts/submit');
+        $data['heading'] = 'Add New Post';
     }
+
+    $post = (array) $post;
+
+    $data['title'] = array_get($post, 'title');
+    $data['category_id'] = array_get($post, 'category_id');
+    $data['status'] = array_get($post, 'status', 'enabled');
+    $data['details'] = array_get($post, 'details');
+    $data['id'] = array_get($post, 'id');
+
+    $data['image'] = '';
+    $data['tags_post'] = [];
+
+    // Change this condition to use isset
+    if (isset($post['tags_post'])) {
+        $data['tags_post'] = explode(',', $post['tags_post']);
+    } else {
+        $data['tags_post'] = []; // Add this line to initialize an empty array
+    }
+
+    // Change this condition to use isset
+    if (isset($post['image']) && !empty($post['image'])) {
+        $data['image'] = $this->url->link('public/images/' . $post['image']);
+    }
+
+    // Fetch the tags list
+    $data['tagsList'] = $this->load->model('Tags')->all();
+
+    // Handle tags
+
+    $data['categories'] = $this->load->model('Categories')->all();
+    $data['posts'] = $this->load->model('Posts')->all();
+
+    return $this->view->render('admin/posts/form', $data);
+}
+
+
 
     /**
     * Submit for creating new post
@@ -140,7 +143,7 @@ class PostsController extends Controller
 
         if ($this->isValid($id)) {
             // it means there are no errors in form validation
-            $this->load->model('Posts')->update($id);
+            $this->load->model('Posts')->update($id, ['tags_post' => implode(',', $this->request->post('tags_post'))]);
 
             $json['success'] = 'Posts  Has Been Updated Successfully';
 
@@ -184,8 +187,8 @@ class PostsController extends Controller
     {
         $this->validator->required('title');
         $this->validator->required('details');
-        $this->validator->required('tags');
-
+        $this->validator->required('tags_post');
+        
         if (is_null($id)) {
             $this->validator->requiredFile('image')->image('image');
         } else {
