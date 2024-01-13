@@ -56,6 +56,32 @@ class PostsModel extends Model
         return $post;
     }
 
+ /**
+     * Get Tags for a Post by Tag IDs
+     *
+     * @param string $tagIds
+     * @return array
+     */
+    public function getTagsForPost($tagIds)
+    {
+        if (empty($tagIds)) {
+            return [];
+        }
+
+        // Convert tag IDs to an array
+        $tagIdsArray = explode(',', $tagIds);
+
+        // Load TagsModel
+        $tagsModel = $this->load->model('Tags');
+
+        // Get tag names for the given tag IDs
+        $tags = $tagsModel->select('id', 'name')
+            ->whereIn('id', $tagIdsArray)
+            ->fetchAll();
+
+        return $tags;
+    }
+
      /**
      * Get Latest Posts
      *
@@ -73,32 +99,35 @@ class PostsModel extends Model
                     ->orderBy('p.id', 'DESC')
                     ->fetchAll();
     }
+/**
+ * Create New Post
+ *
+ * @return void
+ */
+public function create()
+{
+    $image = $this->uploadImage();
 
-     /**
-     * Create New Post
-     *
-     * @return void
-     */
-    public function create()
-    {
-        $image = $this->uploadImage();
-
-        if ($image) {
-            $this->data('image', $image);
-        }
-
-        $user = $this->load->model('Login')->user();
-
-        $this->data('title', $this->request->post('title'))
-             ->data('details', $this->request->post('details'))
-             ->data('category_id', $this->request->post('category_id'))
-             ->data('user_id', $user->id)
-             ->data('tags', $this->request->post('tags'))
-             ->data('related_posts', implode(',', array_filter((array) $this->request->post('related_posts') , 'is_numeric')))
-             ->data('status', $this->request->post('status'))
-             ->data('created', $now = time())
-             ->insert('posts');
+    if ($image) {
+        $this->data('image', $image);
     }
+
+    $user = $this->load->model('Login')->user();
+
+    $userId = $user ? $user->id : null;
+
+    $this->data('title', $this->request->post('title'))
+         ->data('details', $this->request->post('details'))
+         ->data('category_id', $this->request->post('category_id'))
+         ->data('user_id', $userId)
+         ->data('tags_post', implode(',', array_filter((array) $this->request->post('tags_post'), 'is_numeric')))
+         ->data('status', $this->request->post('status'))
+         ->data('created', time())
+         ->insert('posts');
+}
+
+
+     
 
      /**
      * Upload Post Image
@@ -117,28 +146,27 @@ class PostsModel extends Model
      }
 
      /**
-     * Update Posts Record By Id
-     *
-     * @param int $id
-     * @return void
-     */
-    public function update($id)
-    {
-        $image = $this->uploadImage();
+ * Update Posts Record By Id
+ *
+ * @param int $id
+ * @return void
+ */
+public function update($id)
+{
+    $image = $this->uploadImage();
 
-        if ($image) {
-            $this->data('image', $image);
-        }
-
-        $this->data('title', $this->request->post('title'))
-             ->data('details', $this->request->post('details'))
-             ->data('category_id', $this->request->post('category_id'))
-             ->data('tags', $this->request->post('tags'))
-             ->data('status', $this->request->post('status'))
-             ->data('related_posts', implode(',', array_filter((array) $this->request->post('related_posts') , 'is_numeric')))
-             ->where('id=?' , $id)
-             ->update('posts');
+    if ($image) {
+        $this->data('image', $image);
     }
+
+    $this->data('title', $this->request->post('title'))
+         ->data('details', $this->request->post('details'))
+         ->data('category_id', $this->request->post('category_id'))
+         ->data('tags_post', implode(',', array_filter((array) $this->request->post('tags_post'), 'is_numeric')))
+         ->data('status', $this->request->post('status'))
+         ->where('id=?', $id)
+         ->update('posts');
+}
 
      /**
      * Add New Comment to the given post
