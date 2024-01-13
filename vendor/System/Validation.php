@@ -179,22 +179,22 @@ class Validation
      * @param string $customErrorMessage
      * @return $this
      */
-    public function maxLen($inputName, $customErrorMessage = null)
-    {
-        if ($this->hasErrors($inputName)) {
-            return $this;
-        }
-
-        $inputValue = $this->value($inputValue);
-
-        if (strlen($inputValue) > $length) {
-            $message = $customErrorMessage ?: sprintf('%s should be at most %d', ucfirst($inputName), $length);
-            $this->addError($inputName, $message);
-        }
-
+    public function maxLen($inputName, $length, $customErrorMessage = null)
+{
+    if ($this->hasErrors($inputName)) {
         return $this;
-
     }
+
+    $inputValue = $this->value($inputName);
+
+    if (strlen($inputValue) > $length) {
+        $message = $customErrorMessage ?: sprintf('%s should be at most %d', ucfirst($inputName), $length);
+        $this->addError($inputName, $message);
+    }
+
+    return $this;
+}
+
 
      /**
      * Determine if the first input matches the second input
@@ -205,17 +205,18 @@ class Validation
      * @return $this
      */
     public function match($firstInput, $secondInput, $customErrorMessage = null)
-    {
-        $firstInputValue = $this->value($firstInput);
-        $secondInputValue = $this->value($secondInput);
+{
+    $firstInputValue = $this->value($firstInput);
+    $secondInputValue = $this->value($secondInput);
 
-        if ($firstInputValue != $secondInputValue) {
-            $message = $customErrorMessage ?: sprintf('%s should match %s', ucfirst($secondInput), ucfirst($firstInput));
-            $this->addError($secondInput, $message);
-        }
-
-        return $this;
+    if (!empty($firstInputValue) && !empty($secondInputValue) && $firstInputValue != $secondInputValue) {
+        $message = $customErrorMessage ?: sprintf('%s should match %s', ucfirst($firstInput), ucfirst($secondInput));
+        $this->addError($secondInput, $message);
     }
+
+    return $this;
+}
+
 
      /**
      * Determine if the given input is unique in database
@@ -226,41 +227,44 @@ class Validation
      * @return $this
      */
     public function unique($inputName, array $databaseData, $customErrorMessage = null)
-    {
-        if ($this->hasErrors($inputName)) {
-            return $this;
-        }
-
-        $inputValue = $this->value($inputName);
-
-        $table = null;
-        $column = null;
-        $exceptionColumn = null;
-        $exceptionColumnValue = null;
-
-        if (count($databaseData) == 2) {
-            list($table, $column) = $databaseData;
-        } elseif (count($databaseData == 4)) {
-            list($table, $column, $exceptionColumn, $exceptionColumnValue) = $databaseData;
-        }
-
-        if ($exceptionColumn AND $exceptionColumnValue) {
-            $result = $this->app->db->select($column)
-                                    ->from($table)
-                                    ->where($column . ' = ? AND ' . $exceptionColumn . ' != ?' , $inputValue, $exceptionColumnValue)
-                                    ->fetch();
-        } else {
-            $result = $this->app->db->select($column)
-                                    ->from($table)
-                                    ->where($column . ' = ?' , $inputValue)
-                                    ->fetch();
-        }
-
-        if ($result) {
-            $message = $customErrorMessage ?: sprintf('%s already exists', ucfirst($inputName));
-            $this->addError($inputName, $message);
-        }
+{
+    if ($this->hasErrors($inputName)) {
+        return $this;
     }
+
+    $inputValue = $this->value($inputName);
+
+    $table = null;
+    $column = null;
+    $exceptionColumn = null;
+    $exceptionColumnValue = null;
+
+    if (count($databaseData) == 2) {
+        list($table, $column) = $databaseData;
+    } elseif (count($databaseData) == 4) {
+        list($table, $column, $exceptionColumn, $exceptionColumnValue) = $databaseData;
+    }
+
+    if ($exceptionColumn && $exceptionColumnValue) {
+        $result = $this->app->db->select($column)
+            ->from($table)
+            ->where($column . ' = ? AND ' . $exceptionColumn . ' != ?', $inputValue, $exceptionColumnValue)
+            ->fetch();
+    } else {
+        $result = $this->app->db->select($column)
+            ->from($table)
+            ->where($column . ' = ?', $inputValue)
+            ->fetch();
+    }
+
+    if ($result) {
+        $message = $customErrorMessage ?: sprintf('%s already exists', ucfirst($inputName));
+        $this->addError($inputName, $message);
+    }
+
+    return $this;
+}
+
 
      /**
      * Add Custom Message

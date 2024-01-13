@@ -13,9 +13,6 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        if ($loginModel->isLogged()) {
-            return $this->url->redirectTo('/');
-        }
 
         $this->blogLayout->title('Create New Account');
 
