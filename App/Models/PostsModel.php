@@ -36,7 +36,37 @@ class PostsModel extends Model
 
         return $post;
     }
+/**
+     * Get a post with comments and tags by ID
+     *
+     * @param int $id
+     * @return \stdClass|null
+     */
+    public function getPostWithCommentsAndTags($id)
+    {
+        $post = $this->select('p.*', 'c.name AS `category`', 'u.first_name', 'u.last_name', 'u.image AS userImage')
+            ->from('posts p')
+            ->join('LEFT JOIN categories c ON p.category_id=c.id')
+            ->join('LEFT JOIN users u ON p.user_id=u.id')
+            ->where('p.id=? AND p.status=?', $id, 'enabled')
+            ->fetch();
 
+        if (!$post) {
+            return null;
+        }
+
+        // Get comments for the post
+        $post->comments = $this->select('c.*', 'u.first_name', 'u.last_name', 'u.image AS userImage')
+            ->from('comments c')
+            ->join('LEFT JOIN users u ON c.user_id=u.id')
+            ->where('c.post_id=?', $id)
+            ->fetchAll();
+
+        // Get tags for the post
+        $post->tags = $this->getTagsForPost($id);
+
+        return $post;
+    }
     public function getTagsForPost($postId)
     {
         $tags = $this->select('t.*')

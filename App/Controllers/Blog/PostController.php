@@ -6,29 +6,37 @@ use System\Controller;
 
 class PostController extends Controller
 {
-     /**
-     * Display Post Page
-     *
-     * @param string name
-     * @param int $id
-     * @return mixed
-     */
-    public function index($title, $id)
-    {
-        $post = $this->load->model('Posts')->getPostWithComments($id);
+     // In PostController.php
 
-        if (! $post) {
-            return $this->url->redirectTo('/404');
-        }
+/**
+ * Display Post Page
+ *
+ * @param string name
+ * @param int $id
+ * @return mixed
+ */
+public function index($title, $id)
+{
+    $postModel = $this->load->model('Posts');
+    
+    // Get post with comments and tags
+    $post = $postModel->getPostWithCommentsAndTags($id);
 
-        $this->html->setTitle($post->title);
-
-        $data['post'] = $post;
-
-        $view = $this->view->render('blog/post', $data);
-
-        return $this->blogLayout->render($view);
+    if (! $post) {
+        return $this->url->redirectTo('/404');
     }
+
+    $this->html->setTitle($post->title);
+
+    $data['post'] = $post;
+
+    // Pass tags data to the view
+    $data['tags'] = $postModel->getTagsForPost($id);
+
+    $view = $this->view->render('blog/post', $data);
+
+    return $this->blogLayout->render($view);
+}
 
      /**
      * Add New Comment to the given post

@@ -28,6 +28,17 @@
                     </a>
                 </div>
                 <h1 class="heading"><?php echo $post->title; ?></h1>
+                <!-- Display Tags -->
+                <?php if (!empty($post->tags)) : ?>
+                    <div class="tags mt-3">
+                        <span class="badge bg-primary fs-5">Tags:</span>
+                        <?php foreach ($post->tags as $tag) : ?>
+                            <span><a href="<?php echo url('/tag/' . seo($tag->name) . '/' . $tag->id); ?>" class="badge bg-secondary fs-4"><?php echo $tag->name; ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+                <!-- /Display Tags -->
+
                 <div class="date-container">
                     <span class="fa fa-calendar"></span>
                     <span class="date"><?php echo date('d/m/Y h:i A', $post->created); ?></span>
