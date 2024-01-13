@@ -32,6 +32,8 @@
         </a>
     </div>
 
+    
+
     <div class="post-box-footer">
         <a href="#" class="user">
             By:
@@ -41,6 +43,7 @@
             In:
             <span class="main"><?php echo $post->category; ?></span>
         </a>
+        
         <a href="#" class="comments">
             <span class="main"><?php echo $post->total_comments; ?></span>
             Comments
