@@ -102,8 +102,22 @@ class AdsController extends Controller
 
         $ad = (array) $ad;
 
+        $data['link'] = array_get($ad, 'link');
         $data['name'] = array_get($ad, 'name');
+        $data['ad_page'] = array_get($ad, 'page');
         $data['status'] = array_get($ad, 'status', 'enabled');
+
+        $data['start_at'] = ! empty($ad['start_at']) ? date('d-m-Y', $ad['start_at']) : false;
+        $data['end_at'] = ! empty($ad['end_at']) ? date('d-m-Y', $ad['end_at']) : false;
+
+        $data['image'] = '';
+
+        if (! empty($ad['image'])) {
+            // default path to upload ad image : public/images
+            $data['image'] = $this->url->link('public/images/' . $ad['image']);
+        }
+
+        $data['pages'] = $this->getPermissionPages();
 
         return $this->view->render('admin/ads/form', $data);
     }
@@ -180,6 +194,16 @@ class AdsController extends Controller
     private function isValid($id = null)
     {
         $this->validator->required('name');
+        $this->validator->required('link');
+        $this->validator->required('page');
+        $this->validator->required('start_at');
+        $this->validator->required('end_at');
+
+        if (is_null($id)) {
+            $this->validator->requiredFile('image')->image('image');
+        } else {
+            $this->validator->image('image');
+        }
 
         return $this->validator->passes();
     }
