@@ -30,20 +30,13 @@
     <link rel="stylesheet" href="<?php echo assets('admin/plugins/daterangepicker/daterangepicker-bs3.css'); ?>">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="<?php echo assets('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css');?>">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body class="hold-transition skin- sidebar-mini">
   <div class="wrapper">
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="../index2.html" class="logo">
+      <a href="" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>W</b>K</span>
         <!-- logo for regular state and mobile devices -->
@@ -59,10 +52,6 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-
-            <!-- Notifications: style can be found in dropdown.less -->
-
-
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -80,13 +69,11 @@
                       </button>
                   </li>
                   <li>
-    <a href="<?php echo url('/admin/logout') ?>" class="btn btn-default text-white">
-        <span class="fa fa-power-off"></span>
-        Logout
-    </a>
-    
-</li>
-
+                      <a href="<?php echo url('/admin/logout') ?>" class="btn btn-default text-white">
+                          <span class="fa fa-power-off"></span>
+                          Logout
+                      </a>
+                  </li>
               </ul>
             </li>
             
