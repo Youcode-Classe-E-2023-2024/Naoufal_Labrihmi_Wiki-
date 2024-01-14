@@ -29,7 +29,11 @@
                     <tr>
                         <th>#</th>
                         <th>name</th>
+                        <th>Starts At</th>
+                        <th>Ends At</th>
                         <th>Status</th>
+                        <th>Created</th>
+                        <th>Action</th>
                     </tr>
                     <?php foreach ($ads AS $ad) { ?>
                         <tr>
@@ -38,7 +42,10 @@
                             <img src="<?php echo assets('images/' . $ad->image); ?>" style="width:50px; height: 50px; border-radius: 50%;" alt="" />
                             <?php echo $ad->name ;?>
                           </td>
+                          <td style="vertical-align: middle;"><?php echo date('d-m-Y', $ad->start_at);?></td>
+                          <td style="vertical-align: middle;"><?php echo date('d-m-Y', $ad->end_at);?></td>
                           <td style="vertical-align: middle;"><?php echo ucfirst($ad->status);?></td>
+                          <td style="vertical-align: middle;"><?php echo date('d-m-Y', $ad->created);?></td>
                           <td style="vertical-align: middle;">
                             <button type="button" data-target="<?php echo url('admin/ads/edit/' . $ad->id) ?>" data-modal-target="#edit-ad-<?php echo $ad->id; ?>" class="btn btn-primary open-popup">
                                 Edit
