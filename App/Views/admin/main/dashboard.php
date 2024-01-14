@@ -22,14 +22,56 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <h1 class="text-center" style="font-weight: bold">Welcome to Blog Admin!</h1>
+                    <h1 class="text-center" style="font-weight: bold">Welcome to Blog WIKI</h1>
                 </div>
-                <!-- /.box-body -->
+                <br>
+                <div class="row">
+        <div class="col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Users</span>
+                    <span class="info-box-number"><?= $userCount ?></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-list"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Categories</span>
+                    <span class="info-box-number"><?= $categoryCount ?></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-tags"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Tags</span>
+                    <span class="info-box-number"><?= $tagCount ?></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-file"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Posts</span>
+                    <span class="info-box-number"><?= $postCount ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+                  <!-- /.box-body -->
               </div>
+              
           </div>
+          
       </div>
 
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+

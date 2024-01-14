@@ -20,7 +20,7 @@
                 <div class="box box-danger" id="tags-list">
                     <div class="box-header with-border">
                         <h3 class="box-title">Manage Your Tags</h3>
-                        <button class="btn btn-danger pull-right open-popup" type="button" data-target="http://localhost/blog/admin/tags/add" data-modal-target="#add-tag" class="btn btn-primary open-popup">Add New Tag</button>
+                        <button class="btn btn-danger pull-right open-popup" type="button" data-target="http://localhost/Naoufal_Labrihmi_Wiki/admin/tags/add" data-modal-target="#add-tag" class="btn btn-primary open-popup">Add New Tag</button>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

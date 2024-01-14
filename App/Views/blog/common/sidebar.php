@@ -42,7 +42,7 @@
             </section>
             <!--/ Categories Widget -->
             <!-- Popular Posts Widget -->
-            <section class="box wow fadeInDown" data-wow-duration="2s" id="popular-posts-widget">
+            <!-- <section class="box wow fadeInDown" data-wow-duration="2s" id="popular-posts-widget">
                 <h3 class="heading">Popular Posts</h3>
                 <div class="content">
                     <a href="#">
@@ -58,7 +58,7 @@
                         China's Taste For Australian Products
                     </a>
                 </div>
-            </section>
+            </section> -->
             <!--/ Popular Posts Widget -->
             <!-- Ads Widget -->
             <section id="ads-widget" class="wow fadeInDown" data-wow-duration="2s">

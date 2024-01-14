@@ -42,7 +42,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="<?php echo url('/'); ?>">My Blog</a>
+              <a class="navbar-brand" href="<?php echo url('/'); ?>">Wiki™</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

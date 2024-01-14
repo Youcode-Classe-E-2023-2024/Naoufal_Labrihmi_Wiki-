@@ -55,9 +55,9 @@
                 <img src="<?php echo assets('images/' . $post->userImage); ?>" alt="" />
                 <div class="name">
                     <?php echo $post->first_name . ' ' . $post->last_name; ?>
-                    <div class="author-detials">
-                        David Cage is a perfect Blog Publisher that creates wonderful
-                    </div>
+                    <!-- <div class="author-detials">
+                        User of WIKI
+                    </div> -->
                 </div>
             </div>
         </div>

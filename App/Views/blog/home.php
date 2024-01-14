@@ -14,10 +14,10 @@
                 <img src="<?php echo assets('blog/images/slides/1.jpg'); ?>" alt="...">
             </div>
             <div class="item">
-                <img src="<?php echo assets('blog/images/slides/2.jpg'); ?>" alt="...">
+                <img src="<?php echo assets('blog/images/slides/22.jpg'); ?>" alt="...">
             </div>
             <div class="item">
-                <img src="<?php echo assets('blog/images/slides/3.jpg'); ?>" alt="...">
+                <img src="<?php echo assets('blog/images/slides/33.jpg'); ?>" alt="...">
             </div>
           </div>
 
