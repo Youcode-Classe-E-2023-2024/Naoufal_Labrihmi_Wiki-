@@ -51,12 +51,6 @@
                 <li class="active">
                     <a href="<?php echo url('/'); ?>">Home</a>
                 </li>
-                <li>
-                    <a href="#">About Us</a>
-                </li>
-                <li>
-                    <a href="#">Contact Us</a>
-                </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                   <ul class="dropdown-menu">

@@ -84,6 +84,7 @@
         <span class="fa fa-power-off"></span>
         Logout
     </a>
+    
 </li>
 
               </ul>
