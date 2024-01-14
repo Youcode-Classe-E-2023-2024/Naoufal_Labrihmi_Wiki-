@@ -103,4 +103,5 @@ class UsersModel extends Model
              ->where('id=?' , $id)
              ->update('users');
     }
+    
 }

@@ -38,16 +38,16 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin- sidebar-mini">
   <div class="wrapper">
 
     <header class="main-header">
       <!-- Logo -->
       <a href="../index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>T</b>SW</span>
+        <span class="logo-mini"><b>W</b>K</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Blog</b>Cpanel</span>
+        <span class="logo-lg"><b>WIKI</b>Naoufal</span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
@@ -74,26 +74,21 @@
               </a>
               <ul class="dropdown-menu">
                   <li>
-                      <button type="button" class="btn btn-primary" style="width: 100%;" data-toggle="modal" data-target="#user-profile">
+                      <button type="button" class="btn btn-default" style="width: 100%;" data-toggle="modal" data-target="#user-profile">
                           <span class="fa fa-user"></span>
                           Profile
                       </button>
                   </li>
                   <li>
-                      <a href="<?php echo url('/admin/logout') ?>" class="btn btn-default">
-                          <span class="fa fa-power-off"></span>
-                          Logout
-                      </a>
-                  </li>
+    <a href="<?php echo url('/admin/logout') ?>" class="btn btn-default text-white">
+        <span class="fa fa-power-off"></span>
+        Logout
+    </a>
+</li>
+
               </ul>
             </li>
-            <!-- Control Sidebar Toggle Button -->
-            <li>
-              <a href="<?php echo url('/admin/logout'); ?>">
-                  <span class="fa fa-power-off"></span>
-                  Logout
-              </a>
-            </li>
+            
           </ul>
         </div>
       </nav>

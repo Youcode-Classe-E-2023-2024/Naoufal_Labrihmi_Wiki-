@@ -1,9 +1,8 @@
   <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.3
-    </div>
-    <strong>Copyright &copy; 2016 <a href="../http://www.aymanelash.com">Ayman Elash</a>.</strong> All rights
-    reserved.
+  <div class="center hidden-xs text-center">
+    <strong>Copyright &copy; 2024 <a href="../http://www.aymanelash.com">Naoufal Labrihmi</a>.</strong> All rights reserved.
+</div>
+
   </footer>
 </div>
 <!-- ./wrapper -->
