@@ -642,4 +642,68 @@ class Database
          $this->selects = [];
          $this->bindings = [];
      }
+     /**
+ * Get statistics for the number of tags
+ *
+ * @return int
+ */
+public function getTagCount()
+{
+    $query = $this->select('COUNT(*) as tag_count')
+                  ->from('tags')
+                  ->fetchStatement();
+
+    $result = $this->query($query)->fetch();
+
+    return $result->tag_count;
+}
+
+/**
+ * Get statistics for the number of categories
+ *
+ * @return int
+ */
+public function getCategoryCount()
+{
+    $query = $this->select('COUNT(*) as category_count')
+                  ->from('categories')
+                  ->fetchStatement();
+
+    $result = $this->query($query)->fetch();
+
+    return $result->category_count;
+}
+
+/**
+ * Get statistics for the number of posts
+ *
+ * @return int
+ */
+public function getPostCount()
+{
+    $query = $this->select('COUNT(*) as post_count')
+                  ->from('posts')
+                  ->fetchStatement();
+
+    $result = $this->query($query)->fetch();
+
+    return $result->post_count;
+}
+
+/**
+ * Get statistics for the number of users
+ *
+ * @return int
+ */
+public function getUserCount()
+{
+    $query = $this->select('COUNT(*) as user_count')
+                  ->from('users')
+                  ->fetchStatement();
+
+    $result = $this->query($query)->fetch();
+
+    return $result->user_count;
+}
+
 }
