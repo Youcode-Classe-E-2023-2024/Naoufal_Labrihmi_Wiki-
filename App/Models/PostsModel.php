@@ -10,12 +10,66 @@ class PostsModel extends Model
 
     public function all()
     {
+        $user = $this->load->model('Login')->user();
+    
+        // Check if the user is a Super Administrator
+        if ($user && $user->users_group_id == 1) {
+            // Super Administrator - fetch all posts
+            return $this->selectAllPosts();
+        } elseif ($user) {
+            // Regular User - fetch only the user's posts
+            return $this->selectUserPosts($user->id);
+        } else {
+            // Guest or unauthenticated user - fetch public posts or handle as needed
+            return $this->selectPublicPosts();
+        }
+    }
+    
+    /**
+     * Fetch all posts for Super Administrators
+     *
+     * @return array
+     */
+    private function selectAllPosts()
+    {
         return $this->select('p.*', 'c.name AS `category`', 'u.first_name', 'u.last_name')
             ->from('posts p')
             ->join('LEFT JOIN categories c ON p.category_id=c.id')
             ->join('LEFT JOIN users u ON p.user_id=u.id')
             ->fetchAll();
     }
+    
+    /**
+     * Fetch only the user's posts for regular Users
+     *
+     * @param int $userId
+     * @return array
+     */
+    private function selectUserPosts($userId)
+    {
+        return $this->select('p.*', 'c.name AS `category`', 'u.first_name', 'u.last_name')
+            ->from('posts p')
+            ->join('LEFT JOIN categories c ON p.category_id=c.id')
+            ->join('LEFT JOIN users u ON p.user_id=u.id')
+            ->where('p.user_id = ?', $userId)
+            ->fetchAll();
+    }
+    
+    /**
+     * Fetch public posts for unauthenticated users or guests
+     *
+     * @return array
+     */
+    private function selectPublicPosts()
+    {
+        return $this->select('p.*', 'c.name AS `category`', 'u.first_name', 'u.last_name')
+            ->from('posts p')
+            ->join('LEFT JOIN categories c ON p.category_id=c.id')
+            ->join('LEFT JOIN users u ON p.user_id=u.id')
+            ->where('p.status = ?', 'enabled')  // Adjust this condition based on your needs
+            ->fetchAll();
+    }
+    
 
     public function getPostWithComments($id)
     {

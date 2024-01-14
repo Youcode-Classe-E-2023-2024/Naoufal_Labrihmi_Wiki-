@@ -117,15 +117,16 @@ class Database
      *
      * @param \System\Application $app
      */
-    public function __construct(Application $app)
-    {
-        $this->app = $app;
-
-        if (! $this->isConnected()) {
-            $this->connect();
-        }
-    }
-
+    
+     public function __construct(Application $app)
+     {
+         $this->app = $app;
+ 
+         if (! $this->isConnected()) {
+             $this->connect();
+         }
+     }
+ 
      /**
      * Determine if there is any connection to database
      *
@@ -589,6 +590,38 @@ class Database
              $this->bindings[] = $value;
          }
      }
+/**
+     * Filter posts based on user role
+     *
+     * @param int $userId
+     * @param string $userRole
+     * @return $this
+     */
+    public function filterPosts($userId, $userRole)
+{
+    if ($userRole === 'Super Administrators') {
+        // Super Administrators can see everything, so no need for additional filtering
+        return $this;
+    } elseif ($userRole === 'Users') {
+        // Regular users can only see their own posts
+        $this->where('user_id', '=', $userId);
+    }
+
+    return $this;
+}
+
+
+    public function getUserId()
+    {
+        // Example: Retrieve user ID from the session
+        return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+    }
+
+    public function getUserRole()
+    {
+        // Example: Retrieve user role from the session
+        return isset($_SESSION['user_role']) ? $_SESSION['user_role'] : null;
+    }
 
       /**
       * Reset All Data

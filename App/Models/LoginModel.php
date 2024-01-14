@@ -55,6 +55,13 @@ class LoginModel extends Model
     {
         return $this->user;
     }
+// In PostsController
+private function getUserId()
+{
+    // Replace this with your actual function to get the logged-in user ID
+    // Example: Retrieve user ID from the session
+    return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+}
 
     /**
     * Determine whether the user is logged in

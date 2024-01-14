@@ -134,7 +134,15 @@ $app->route->add('/logout', 'Blog/Logout');
 //$app->route->add('/search', 'Blog/Search');
 // Add the search route
 $app->route->add('/search', 'Blog/Search');
+$app->route->add('/posts', 'Blog/Posts');
 $app->route->add('/search/submit', 'Blog/Search@submit', 'POST');
+
+$app->route->add('/posts', 'Blog/Posts');
+$app->route->add('/posts/add', 'Blog/Posts@add', 'POST');
+$app->route->add('/posts/submit', 'Blog/Posts@submit', 'POST');
+$app->route->add('/posts/edit/:id', 'Blog/Posts@edit', 'POST');
+$app->route->add('/posts/save/:id', 'Blog/Posts@save' , 'POST');
+$app->route->add('/posts/delete/:id', 'Blog/Posts@delete', 'POST');
 
 
 // Not Found Routes

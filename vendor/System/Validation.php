@@ -318,6 +318,7 @@ class Validation
     {
         return implode('<br>', $this->errors);
     }
+    
 
      /**
      * Get the value for the given input name

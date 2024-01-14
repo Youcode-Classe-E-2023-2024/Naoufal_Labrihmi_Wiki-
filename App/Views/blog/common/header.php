@@ -78,8 +78,8 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                        <a href="<?php echo url('/profile') ?>">My Profile</a>
-                        <a href="<?php echo url('/profile/posts') ?>">My posts</a>
+                        <!-- <a href="<?php echo url('admin/profile') ?>">My Profile</a> -->
+                        <a href="<?php echo url('admin/posts') ?>">My posts</a>
                         <a href="<?php echo url('/logout') ?>">Logout</a>
                     </li>
 
