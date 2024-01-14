@@ -50,7 +50,7 @@ Le site Wiki permet aux utilisateurs, après authentification, de publier des wi
 ## Technologies Requises
 
 ### Frontend
-- HTML5, CSS Framework, Javascript.
+- HTML5, CSS Framework(Bootstrap), Javascript.
 
 ### Backend
 - PHP 8 avec architecture MVC.
