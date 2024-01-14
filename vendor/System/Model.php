@@ -34,6 +34,30 @@ abstract class Model
      * @param string $key
      * @return mixed
      */
+    // In PostsModel
+public function getTotalPosts()
+{
+    return $this->count(); // Assuming you have a count method in your Model class
+}
+
+// In UsersModel
+public function getTotalUsers()
+{
+    return $this->count();
+}
+
+// In TagsModel
+public function getTotalTags()
+{
+    return $this->count();
+}
+
+// In CategoriesModel
+public function getTotalCategories()
+{
+    return $this->count();
+}
+
     public function __get($key)
     {
         return $this->app->get($key);
