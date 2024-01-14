@@ -10,14 +10,14 @@
 
           <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="<?php echo assets('blog/images/slides/1.jpg'); ?>" alt="...">
+          <div class="item active">
+                <img src="<?php echo assets('blog/images/slides/AdobeStock_542915248-scaled-1-2000x889.jpg'); ?>" alt="...">
             </div>
             <div class="item">
-                <img src="<?php echo assets('blog/images/slides/22.jpg'); ?>" alt="...">
+                <img src="<?php echo assets('blog/images/slides/picasso-guernica.jpg'); ?>" alt="...">
             </div>
             <div class="item">
-                <img src="<?php echo assets('blog/images/slides/33.jpg'); ?>" alt="...">
+                <img src="<?php echo assets('blog/images/slides/vikings.jpg'); ?>" alt="...">
             </div>
           </div>
 
