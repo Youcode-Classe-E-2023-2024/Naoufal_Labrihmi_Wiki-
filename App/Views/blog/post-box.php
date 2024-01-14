@@ -12,14 +12,14 @@
                 <span class="fa fa-google-plus"></span>
             </a>
         </div>
-        <h1 class="heading">
+        <h1 class="heading ">
             <a href="<?php echo url('/post/' . seo($post->title) . '/' . $post->id); ?>"><?php echo $post->title; ?></a>
         </h1>
         <div class="date-container">
             <span class="fa fa-calendar"></span>
             <span class="date"><?php echo date('d/m/Y h:i A');?></span>
         </div>
-        <div class="clearfix"></div>
+        <div class="clearfix "></div>
         <a href="<?php echo url('/post/' . seo($post->title) . '/' . $post->id); ?>" class="image-box">
             <img src="<?php echo assets('images/' . $post->image); ?>" alt="<?php echo $post->title; ?>" />
         </a>
