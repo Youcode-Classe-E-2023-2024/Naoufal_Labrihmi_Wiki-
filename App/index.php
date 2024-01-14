@@ -132,6 +132,9 @@ $app->route->add('/logout', 'Blog/Logout');
 //$app->route->add('/about-us', 'Blog/About');
 //$app->route->add('/profile', 'Blog/Profile');
 //$app->route->add('/search', 'Blog/Search');
+// Add the search route
+$app->route->add('/search', 'Blog/Search');
+$app->route->add('/search/submit', 'Blog/Search@submit', 'POST');
 
 
 // Not Found Routes

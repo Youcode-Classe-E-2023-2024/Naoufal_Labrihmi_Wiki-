@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title><?php echo $title; ?></title>
+    <style>
+  .mrg{
+    margin: 0 100px;
+  }
+</style>
     <!-- Bootstrap -->
     <link href="<?php echo assets('blog/css/bootstrap.min.css');?>" rel="stylesheet">
     <!-- Font Awesome -->

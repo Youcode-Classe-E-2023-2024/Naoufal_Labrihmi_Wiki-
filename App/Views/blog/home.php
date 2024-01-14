@@ -1,4 +1,5 @@
-        <!-- Slideshow -->
+      
+      <!-- Slideshow -->
         <div id="slideshow" class="carousel slide wow fadeInDown"  data-wow-duration="3s" data-ride="carousel">
           <!-- Indicators -->
           <ol class="carousel-indicators">
@@ -32,9 +33,43 @@
         </div>
         <!--/ Slideshow -->
         <!-- Main Content -->
-        <div class="col-sm-9 col-xs-12" id="main-content">
-            <?php foreach ($posts AS $post) { ?>
-                <?php echo $post_box($post);?>
-             <?php } ?>
+        
+
+        <div class="search-container d-flex justify-content-center align-items-center mrg">
+    <div class="active-pink-3 active-pink-4 mb-4 mx-3">
+        <input type="text" class="form-control search-input" id="searchInput" onkeyup="filterPosts()" placeholder="Search by name...">
+    </div>
+</div>
+
+<br>
+<!-- Main Content -->
+<div class="col-sm-9 col-xs-12" id="main-content">
+    <?php foreach ($posts as $post) { ?>
+        <div class="post-box">
+            <?php echo $post_box($post); ?>
         </div>
-        <!--/ Main Content -->
+    <?php } ?>
+</div>
+
+
+<!--/ Main Content -->
+
+<script>
+    function filterPosts() {
+        // Get the input value and convert it to lowercase for case-insensitive matching
+        var searchValue = document.getElementById('searchInput').value.toLowerCase();
+
+        // Get all post elements
+        var posts = document.querySelectorAll('.post-box');
+
+        // Loop through each post and toggle visibility based on the search value
+        posts.forEach(function(post) {
+            var postContent = post.textContent.toLowerCase();
+
+            // Toggle visibility based on the search value
+            post.style.display = postContent.includes(searchValue) ? 'block' : 'none';
+        });
+    }
+</script>
+
+
